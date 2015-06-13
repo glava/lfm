@@ -53,7 +53,7 @@ func resolveUrl(apiKey string, artist string, limit int) string {
 }
 
 func readApiConfig() ApiConfig {
-	data, err := ioutil.ReadFile("/Users/ojkic/.lfm/config")
+	data, err := ioutil.ReadFile("/Users/goranojkic/.lfm/config")
 	var auth ApiConfig
 
 	if err != nil {
@@ -84,14 +84,8 @@ func parseJson(jsonBody []byte, result interface{}) error {
 	return json.Unmarshal(jsonBody, &result)
 }
 
-func main() {
-	apiConfig := readApiConfig()
-
-	artistName := flag.String("a", "", "artist name")
-	limit := flag.Int("l", 20, "limit")
-	flag.Parse()
-
-	var url = resolveUrl(apiConfig.ApiKey, *artistName, *limit)
+func artistSongs(apiKey string, artist string, limit int) {
+	var url = resolveUrl(apiKey, artist, limit)
 	body, error := executeRequest(url)
 
 	var reponse LastFmResponse
@@ -101,6 +95,25 @@ func main() {
 		fmt.Printf("%s", error)
 	} else {
 		fmt.Println(reponse.Toptracks.Track[1].Name)
+	}
+}
+
+
+func main() {
+	apiConfig := readApiConfig()
+
+	artistName := flag.String("a", "", "artist name")
+	limit := flag.Int("l", 20, "limit")
+
+	//userNames := flag.String("u", "", "last.fm user names comma separated")
+	//range := flag.String("r", "", "time range you are searching for")
+
+	flag.Parse()
+
+	if *artistName != "" {
+		artistSongs(apiConfig.ApiKey, *artistName, *limit)
+	} else {
+		fmt.Println("Not yet implemented")		
 	}
 
 }
