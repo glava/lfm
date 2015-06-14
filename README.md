@@ -1,6 +1,37 @@
 # lfm
-Go client for last.fm
 
-Currently able to run
+lfm is a last.fm client written in go
 
+## Usage
+
+To list for users what they have been listening you can issue
+
+```go
+go run lfm.go -u goranche,poohica,milann89 -p 12month
+```
+
+To get top tracks from artist you can run
+
+```go
 go run lfm.go -a Drake
+```
+
+## Idea 
+
+I created this project cause I wanted to learn go. I will try to cover as much of the language as possible. That is why some parts of the code will be overengineered. Topics I want to cover are:
+
+- basic structures
+- concurency
+- io
+- testing
+- logging
+- regex
+- json
+- package organization
+- os tooling
+- go lang patterns
+
+
+## License
+
+The MIT License (MIT) - see LICENSE for more details
