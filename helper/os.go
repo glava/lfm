@@ -34,7 +34,5 @@ func Output(response lastfm.Response, optionalTitle string) {
 	if optionalTitle != "" {
 		color.Green(optionalTitle)
 	}
-	for _, v := range response.Toptracks.Track {
-		color.Yellow("\t" + v.Artist.Name + " - " + v.Name)
-	}
+	color.Yellow(response.ToString())
 }

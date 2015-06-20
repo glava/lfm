@@ -40,12 +40,12 @@ func getHttpBody(url string) (body []byte, err error) {
 	return body, err
 }
 
-func Execute(url string) chan Response {
-	yield := make(chan Response)
+func Execute(url string) chan TracksResponse {
+	yield := make(chan TracksResponse)
 	go func() {
 		body, error := getHttpBody(url)
 
-		var response Response
+		var response TracksResponse
 		json.Unmarshal(body, &response)
 
 		if error != nil {

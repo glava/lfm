@@ -1,6 +1,10 @@
 package lastfm
 
-type Response struct {
+type Response interface {
+	ToString() string
+}
+
+type TracksResponse struct {
 	Toptracks struct {
 		Track []struct {
 			Name       string `json:"name"`
@@ -34,6 +38,14 @@ type Response struct {
 	} `json:"toptracks"`
 }
 
+func (t TracksResponse) ToString() string {
+	s := ""
+	for _, v := range t.Toptracks.Track {
+		s = s + v.Artist.Name + " - " + v.Name + "\n"
+	}
+	return s
+}
+
 type ArtistResponse struct {
 	Topartists struct {
 		Artist []struct {
@@ -53,4 +65,12 @@ type ArtistResponse struct {
 			Tag string `json:"tag"`
 		} `json:"@attr"`
 	} `json:"topartists"`
+}
+
+func (t ArtistResponse) ToString() string {
+	s := ""
+	for _, v := range t.Topartists.Artist {
+		s = v.Name + "\n"
+	}
+	return s
 }
