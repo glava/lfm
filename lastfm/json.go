@@ -33,3 +33,24 @@ type Response struct {
 		} `json:"@attr"`
 	} `json:"toptracks"`
 }
+
+type ArtistResponse struct {
+	Topartists struct {
+		Artist []struct {
+			Name       string `json:"name"`
+			Mbid       string `json:"mbid"`
+			URL        string `json:"url"`
+			Streamable string `json:"streamable"`
+			Image      []struct {
+				Text string `json:"#text"`
+				Size string `json:"size"`
+			} `json:"image"`
+			Attr struct {
+				Rank string `json:"rank"`
+			} `json:"@attr"`
+		} `json:"artist"`
+		Attr struct {
+			Tag string `json:"tag"`
+		} `json:"@attr"`
+	} `json:"topartists"`
+}
