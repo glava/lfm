@@ -8,8 +8,7 @@ import (
 	"strings"
 )
 
-
-func cleanParam(param string)string {
+func cleanParam(param string) string {
 	return strings.Replace(param, " ", "+", -1)
 }
 

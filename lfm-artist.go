@@ -2,9 +2,9 @@ package main
 
 import (
 	"./config"
+	"./helper"
 	"./lastfm"
 	"flag"
-	"./helper"
 	"strings"
 )
 
