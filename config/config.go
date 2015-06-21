@@ -7,7 +7,8 @@ import (
 )
 
 type ApiConfig struct {
-	ApiKey string `json:"api_key"`
+	ApiKey    string `json:"api_key"`
+	ApiSecret string `json:"api_secret"`
 }
 
 func parse(jsonBody []byte, result interface{}) error {

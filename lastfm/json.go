@@ -48,6 +48,14 @@ func (t TracksResponse) ToString() string {
 	return s
 }
 
+type TokenResponse struct {
+	Token string `json:"token"`
+}
+
+func (t TokenResponse) ToString() string {
+	return t.Token
+}
+
 type ArtistResponse struct {
 	Topartists struct {
 		Artist []struct {
@@ -85,6 +93,12 @@ func ToTracks(httpBody []byte) TracksResponse {
 
 func ToArtists(httpBody []byte) ArtistResponse {
 	var response ArtistResponse
+	json.Unmarshal(httpBody, &response)
+	return response
+}
+
+func ToToken(httpBody []byte) TokenResponse {
+	var response TokenResponse
 	json.Unmarshal(httpBody, &response)
 	return response
 }

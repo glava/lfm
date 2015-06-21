@@ -1,7 +1,6 @@
 package lastfm
 
 import (
-	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -20,6 +19,10 @@ func TagUrl(apiKey string, tag string, limit int) string {
 	return fmt.Sprintf("http://ws.audioscrobbler.com/2.0/?method=tag.gettopartists&tag=%s&api_key=%s&limit=%d&format=json", tag, apiKey, limit)
 }
 
+func TokenUrl(apiKey string, apiSig string) string {
+	return fmt.Sprintf("http://ws.audioscrobbler.com/2.0/?method=auth.gettoken&api_key=%s&api_sig=%s&format=json", apiKey, apiSig)
+}
+
 func Execute(url string) chan []byte {
 	yield := make(chan []byte)
 	go func() {
@@ -27,7 +30,6 @@ func Execute(url string) chan []byte {
 		if error != nil {
 			fmt.Printf("%s", error)
 		} else {
-
 			yield <- body
 		}
 	}()
@@ -48,6 +50,7 @@ func getHttpBody(url string) (body []byte, err error) {
 		defer response.Body.Close()
 		var ioError error
 		body, ioError = ioutil.ReadAll(response.Body)
+
 		if ioError != nil {
 			return body, ioError
 		}
