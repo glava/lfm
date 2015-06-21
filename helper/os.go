@@ -2,6 +2,7 @@ package helper
 
 import (
 	".././lastfm"
+	"fmt"
 	"github.com/fatih/color"
 	"io"
 	"os"
@@ -34,5 +35,6 @@ func Output(response lastfm.Response, optionalTitle string) {
 	if optionalTitle != "" {
 		color.Green(optionalTitle)
 	}
-	color.Yellow(response.ToString())
+	//TODO fix this by passing coloring flag
+	fmt.Println(response.ToString())
 }
