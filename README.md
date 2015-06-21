@@ -4,7 +4,7 @@ lfm is a last.fm client written in go
 
 ## Usage
 
-To list for users what they have been listening you can issue
+To list what users have been listening, you can issue
 
 ```go
 go run lfm.go -u goranche,poohica,milann89 -p 12month
