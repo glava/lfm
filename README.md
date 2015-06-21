@@ -16,7 +16,7 @@ To get top tracks from artist you can run
 go run lfm-artist.go -a Drake
 ```
 
-Currently working on pipeing commands so you can do things like this
+Currently working on piping commands so you can do things like this
 
 ```go
 go run lfm-tag.go -t rap | go run lfm-artist.go
