@@ -19,7 +19,7 @@ func main() {
 
 	for _, artist := range artists {
 		if len(strings.TrimSpace(artist)) > 0 {
-			helper.Output(<-lastfm.Execute(lastfm.ArtistUrl(apiConfig.ApiKey, artist, *limit)), "")
+			helper.Output(lastfm.ToTracks(<-lastfm.Execute(lastfm.ArtistUrl(apiConfig.ApiKey, artist, *limit))), "")
 		}
 	}
 

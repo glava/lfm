@@ -17,7 +17,7 @@ func main() {
 	flag.Parse()
 
 	for _, user := range strings.Split(*userNames, ",") {
-		helper.Output(<-lastfm.Execute(lastfm.UserUrl(apiConfig.ApiKey, user, *limit, *period)), user)
+		helper.Output(lastfm.ToTracks(<-lastfm.Execute(lastfm.UserUrl(apiConfig.ApiKey, user, *limit, *period))), user)
 	}
 
 }

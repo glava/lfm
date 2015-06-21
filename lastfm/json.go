@@ -1,5 +1,7 @@
 package lastfm
 
+import "encoding/json"
+
 type Response interface {
 	ToString() string
 }
@@ -70,7 +72,19 @@ type ArtistResponse struct {
 func (t ArtistResponse) ToString() string {
 	s := ""
 	for _, v := range t.Topartists.Artist {
-		s = v.Name + "\n"
+		s = s + v.Name + "\n"
 	}
 	return s
+}
+
+func ToTracks(httpBody []byte) TracksResponse {
+	var response TracksResponse
+	json.Unmarshal(httpBody, &response)
+	return response
+}
+
+func ToArtists(httpBody []byte) ArtistResponse {
+	var response ArtistResponse
+	json.Unmarshal(httpBody, &response)
+	return response
 }

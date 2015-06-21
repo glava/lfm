@@ -16,6 +16,12 @@ To get top tracks from artist you can run
 go run lfm.go -a Drake
 ```
 
+Currently working on pipeing commands so you can do things like this
+
+```go
+go run lfm-tag.go -t rap | go run lfm-artist.go
+```
+
 ## Idea 
 
 I created this project cause I wanted to learn go. I will try to cover as much of the language as possible. That is why some parts of the code will be overengineered. Topics I want to cover are:

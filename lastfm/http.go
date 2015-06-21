@@ -8,10 +8,6 @@ import (
 	"strings"
 )
 
-func cleanParam(param string) string {
-	return strings.Replace(param, " ", "+", -1)
-}
-
 func ArtistUrl(apiKey string, artist string, limit int) string {
 	return fmt.Sprintf("http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=%s&api_key=%s&limit=%d&format=json", cleanParam(artist), apiKey, limit)
 }
@@ -22,6 +18,25 @@ func UserUrl(apiKey string, user string, limit int, period string) string {
 
 func TagUrl(apiKey string, tag string, limit int) string {
 	return fmt.Sprintf("http://ws.audioscrobbler.com/2.0/?method=tag.gettopartists&tag=%s&api_key=%s&limit=%d&format=json", tag, apiKey, limit)
+}
+
+func Execute(url string) chan []byte {
+	yield := make(chan []byte)
+	go func() {
+		body, error := getHttpBody(url)
+		if error != nil {
+			fmt.Printf("%s", error)
+		} else {
+
+			yield <- body
+		}
+	}()
+
+	return yield
+}
+
+func cleanParam(param string) string {
+	return strings.Replace(param, " ", "+", -1)
 }
 
 func getHttpBody(url string) (body []byte, err error) {
@@ -38,42 +53,4 @@ func getHttpBody(url string) (body []byte, err error) {
 		}
 	}
 	return body, err
-}
-
-func Execute(url string) chan TracksResponse {
-	yield := make(chan TracksResponse)
-	go func() {
-		body, error := getHttpBody(url)
-
-		var response TracksResponse
-		json.Unmarshal(body, &response)
-
-		if error != nil {
-			fmt.Printf("%s", error)
-		} else {
-
-			yield <- response
-		}
-	}()
-
-	return yield
-}
-
-func ArtistExecute(url string) chan ArtistResponse {
-	yield := make(chan ArtistResponse)
-	go func() {
-		body, error := getHttpBody(url)
-
-		var response ArtistResponse
-		json.Unmarshal(body, &response)
-
-		if error != nil {
-			fmt.Printf("%s", error)
-		} else {
-
-			yield <- response
-		}
-	}()
-
-	return yield
 }
