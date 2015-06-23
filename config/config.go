@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"os"
 )
 
 type ApiConfig struct {
@@ -15,9 +16,8 @@ func parse(jsonBody []byte, result interface{}) error {
 	return json.Unmarshal(jsonBody, &result)
 }
 
-//TODO: solve this stupid read from home issue. currently it doesnt get the concept of ~
 func Load() ApiConfig {
-	data, err := ioutil.ReadFile("/Users/goranojkic/.lfm/config")
+	data, err := ioutil.ReadFile(os.Getenv("HOME") + "/.lfm/config")
 	var auth ApiConfig
 
 	if err != nil {
