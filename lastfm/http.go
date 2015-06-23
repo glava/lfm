@@ -16,7 +16,7 @@ func UserUrl(apiKey string, user string, limit int, period string) string {
 }
 
 func TagUrl(apiKey string, tag string, limit int) string {
-	return fmt.Sprintf("http://ws.audioscrobbler.com/2.0/?method=tag.gettopartists&tag=%s&api_key=%s&limit=%d&format=json", tag, apiKey, limit)
+	return fmt.Sprintf("http://ws.audioscrobbler.com/2.0/?method=tag.gettopartists&tag=%s&api_key=%s&limit=%d&format=json", cleanParam(tag), apiKey, limit)
 }
 
 func TokenUrl(apiKey string, apiSig string) string {
