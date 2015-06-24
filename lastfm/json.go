@@ -86,6 +86,18 @@ func (t ArtistResponse) ToString() string {
 	return s
 }
 
+type SessionResponse struct {
+	Session struct {
+		Name       string `json:"name"`
+		Key        string `json:"key"`
+		Subscriber string `json:"subscriber"`
+	} `json:"session"`
+}
+
+func (t SessionResponse) ToString() string {
+	return t.Session.Name + " with session key " + t.Session.Key
+}
+
 func ToTracks(httpBody []byte) TracksResponse {
 	var response TracksResponse
 	json.Unmarshal(httpBody, &response)
@@ -100,6 +112,12 @@ func ToArtists(httpBody []byte) ArtistResponse {
 
 func ToToken(httpBody []byte) TokenResponse {
 	var response TokenResponse
+	json.Unmarshal(httpBody, &response)
+	return response
+}
+
+func ToSession(httpBody []byte) SessionResponse {
+	var response SessionResponse
 	json.Unmarshal(httpBody, &response)
 	return response
 }

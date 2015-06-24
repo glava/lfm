@@ -23,6 +23,11 @@ func TokenUrl(apiKey string, apiSig string) string {
 	return fmt.Sprintf("http://ws.audioscrobbler.com/2.0/?method=auth.gettoken&api_key=%s&api_sig=%s&format=json", apiKey, apiSig)
 }
 
+func SessionUrl(apiKey string, token string, apiSig string) string {
+	s:= fmt.Sprintf("http://ws.audioscrobbler.com/2.0/?method=auth.getsession&api_key=%s&token=%s&api_sig=%s&format=json", apiKey, token, apiSig)
+	fmt.Printf(s)
+	return s
+}
 func Execute(url string) chan []byte {
 	yield := make(chan []byte)
 	go func() {

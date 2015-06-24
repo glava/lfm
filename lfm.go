@@ -6,7 +6,7 @@ import (
 	"github.com/glava/lfm/helper"
 	"github.com/glava/lfm/lastfm"
 	"strings"
-	"fmt"
+	//"fmt"
 )
 
 func main() {
@@ -20,9 +20,10 @@ func main() {
 	playlist := flag.String("pl", "", "playlist")
 
 	flag.Parse()
-	//fmt.Println(config.GetSession())
+
+	//config.SaveToken(lastfm.FetchRequestToken(apiConfig))
 	//config.SaveSession(lastfm.FetchSession(apiConfig, config.GetToken()))
-	
+		
 	artists := append(strings.Split(*artistsFlag, ","), helper.ReadStdin()...)
 
 	if *artistsFlag != "" {
