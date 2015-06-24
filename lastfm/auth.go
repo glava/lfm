@@ -1,8 +1,12 @@
 package lastfm
 
-import ".././config"
+import "github.com/glava/lfm/config"
 import "crypto/md5"
 import "encoding/hex"
+import "fmt"
+import "os"
+import "bufio"
+import "github.com/skratchdot/open-golang/open"
 
 func FetchRequestToken(config config.ApiConfig) string {
 	hasher := md5.New()

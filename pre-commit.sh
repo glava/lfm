@@ -2,6 +2,10 @@
 
 gofmt -w .
 
-go run lfm-user.go -u goranche,poohica
+go build 
 
-go run lfm-tag.go -t rap | go run lfm-artist.go -a Drake
+go install
+
+lfm -u goranche,poohica
+
+lfm -t rap | lfm -a Drake

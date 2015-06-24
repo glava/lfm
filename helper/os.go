@@ -1,9 +1,9 @@
 package helper
 
 import (
-	".././lastfm"
 	"fmt"
 	"github.com/fatih/color"
+	"github.com/glava/lfm/lastfm"
 	"io"
 	"os"
 	"strings"
