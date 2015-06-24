@@ -30,20 +30,20 @@ func main() {
 
 		for _, artist := range artists {
 			if len(strings.TrimSpace(artist)) > 0 {
-				helper.Output(lastfm.ToTracks(<-lastfm.Execute(lastfm.ArtistUrl(apiConfig.ApiKey, artist, *limit))), "")
+				helper.Output(lastfm.ToTracks(<-lastfm.Get(lastfm.ArtistUrl(apiConfig.ApiKey, artist, *limit))), "")
 			}
 		}
 	}
 
 	if *userNames != "" {
 		for _, user := range strings.Split(*userNames, ",") {
-			helper.Output(lastfm.ToTracks(<-lastfm.Execute(lastfm.UserUrl(apiConfig.ApiKey, user, *limit, *period))), user)
+			helper.Output(lastfm.ToTracks(<-lastfm.Get(lastfm.UserUrl(apiConfig.ApiKey, user, *limit, *period))), user)
 		}
 	}
 
 	if *tags != "" {
 		for _, tag := range strings.Split(*tags, ",") {
-			helper.Output(lastfm.ToArtists(<-lastfm.Execute(lastfm.TagUrl(apiConfig.ApiKey, tag, *limit))), "")
+			helper.Output(lastfm.ToArtists(<-lastfm.Get(lastfm.TagUrl(apiConfig.ApiKey, tag, *limit))), "")
 		}
 	}
 

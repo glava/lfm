@@ -11,7 +11,7 @@ import "sort"
 
 func FetchRequestToken(config config.ApiConfig) string {
 	params := map[string]string{"api_key": config.ApiKey, "method": "auth.gettoken"}
-	return ToToken(<-Execute(TokenUrl(config.ApiKey, Signature(params, config.ApiSecret)))).ToString()
+	return ToToken(<-Get(TokenUrl(config.ApiKey, Signature(params, config.ApiSecret)))).ToString()
 }
 
 func FetchSession(config config.ApiConfig, token string) string {
@@ -23,7 +23,7 @@ func FetchSession(config config.ApiConfig, token string) string {
 	reader := bufio.NewReader(os.Stdin)
 	text, _ := reader.ReadString('\n')
 	fmt.Println(text)
-	return ToSession(<-Execute(SessionUrl(config.ApiKey, token, Signature(params, config.ApiSecret)))).Session.Key
+	return ToSession(<-Get(SessionUrl(config.ApiKey, token, Signature(params, config.ApiSecret)))).Session.Key
 }
 
 func Signature(params map[string]string, apiSecret string) string {

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 	"strings"
 )
 
@@ -28,10 +29,25 @@ func SessionUrl(apiKey string, token string, apiSig string) string {
 	fmt.Printf(s)
 	return s
 }
-func Execute(url string) chan []byte {
+
+func Get(url string) chan []byte {
 	yield := make(chan []byte)
 	go func() {
 		body, error := getHttpBody(url)
+		if error != nil {
+			fmt.Printf("%s", error)
+		} else {
+			yield <- body
+		}
+	}()
+
+	return yield
+}
+
+func Post(params map[string]string) chan []byte {
+	yield := make(chan []byte)
+	go func() {
+		body, error := postBody(params)
 		if error != nil {
 			fmt.Printf("%s", error)
 		} else {
@@ -50,6 +66,30 @@ func getHttpBody(url string) (body []byte, err error) {
 	response, err := http.Get(url)
 
 	if err != nil {
+		return body, err
+	} else {
+		defer response.Body.Close()
+		var ioError error
+		body, ioError = ioutil.ReadAll(response.Body)
+
+		if ioError != nil {
+			return body, ioError
+		}
+	}
+	return body, err
+}
+
+func postBody(params map[string]string) (body []byte, err error) {
+	v := url.Values{}
+	fmt.Println("!!!")
+	for k, v1 := range params {
+		v.Set(k, v1)
+	}
+	fmt.Println(params)
+	response, err := http.PostForm("http://ws.audioscrobbler.com/2.0/", v)
+
+	if err != nil {
+		fmt.Println("hooo")
 		return body, err
 	} else {
 		defer response.Body.Close()
