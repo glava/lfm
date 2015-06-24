@@ -23,7 +23,7 @@ func main() {
 
 	//config.SaveToken(lastfm.FetchRequestToken(apiConfig))
 	//config.SaveSession(lastfm.FetchSession(apiConfig, config.GetToken()))
-		
+
 	artists := append(strings.Split(*artistsFlag, ","), helper.ReadStdin()...)
 
 	if *artistsFlag != "" {

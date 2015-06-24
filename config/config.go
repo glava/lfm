@@ -13,9 +13,9 @@ type ApiConfig struct {
 }
 
 func check(e error) {
-    if e != nil {
-        panic(e)
-    }
+	if e != nil {
+		panic(e)
+	}
 }
 
 func parse(jsonBody []byte, result interface{}) error {
@@ -35,25 +35,25 @@ func Load() ApiConfig {
 }
 
 func SaveToken(token string) {
- 	d1 := []byte(token)
-    err := ioutil.WriteFile(os.Getenv("HOME") + "/.lfm/token", d1, 0644)
-    check(err)
+	d1 := []byte(token)
+	err := ioutil.WriteFile(os.Getenv("HOME")+"/.lfm/token", d1, 0644)
+	check(err)
 }
 
 func GetToken() string {
 	dat, err := ioutil.ReadFile(os.Getenv("HOME") + "/.lfm/token")
-    check(err)
-    return string(dat)
+	check(err)
+	return string(dat)
 }
 
 func SaveSession(session string) {
- 	d1 := []byte(session)
-    err := ioutil.WriteFile(os.Getenv("HOME") + "/.lfm/session", d1, 0644)
-    check(err)
+	d1 := []byte(session)
+	err := ioutil.WriteFile(os.Getenv("HOME")+"/.lfm/session", d1, 0644)
+	check(err)
 }
 
 func GetSession() string {
 	dat, err := ioutil.ReadFile(os.Getenv("HOME") + "/.lfm/session")
-    check(err)
-    return string(dat)
+	check(err)
+	return string(dat)
 }

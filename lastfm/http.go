@@ -24,7 +24,7 @@ func TokenUrl(apiKey string, apiSig string) string {
 }
 
 func SessionUrl(apiKey string, token string, apiSig string) string {
-	s:= fmt.Sprintf("http://ws.audioscrobbler.com/2.0/?method=auth.getsession&api_key=%s&token=%s&api_sig=%s&format=json", apiKey, token, apiSig)
+	s := fmt.Sprintf("http://ws.audioscrobbler.com/2.0/?method=auth.getsession&api_key=%s&token=%s&api_sig=%s&format=json", apiKey, token, apiSig)
 	fmt.Printf(s)
 	return s
 }
