@@ -4,22 +4,29 @@ lfm is a last.fm client written in go
 
 ## Usage
 
+Inside a root of project run
+
+```bash
+go build
+go install
+```
+
 To list what users have been listening, you can issue
 
 ```go
-go run lfm-user.go -u goranche,poohica,milann89 -p 12month
+lfm -u goranche,poohica,milann89 -p 12month
 ```
 
 To get top tracks from artist you can run
 
 ```go
-go run lfm-artist.go -a Drake
+lfm -a Drake
 ```
 
 Currently working on piping commands so you can do things like this
 
 ```go
-go run lfm-tag.go -t rap | go run lfm-artist.go
+lfm -t rap | lfm -a Drake
 ```
 
 ## Idea 
