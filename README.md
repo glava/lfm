@@ -13,19 +13,19 @@ go install
 
 To list what users have been listening, you can issue
 
-```go
+```bash
 lfm -u goranche,poohica,milann89 -p 12month
 ```
 
 To get top tracks from artist you can run
 
-```go
+```bash
 lfm -a Drake
 ```
 
 Currently working on piping commands so you can do things like this
 
-```go
+```bash
 lfm -t rap | lfm -a Drake
 ```
 
