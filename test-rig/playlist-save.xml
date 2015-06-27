@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+    <playlists user="Goranche">
+        <playlist>
+            <id>11826164</id>
+            <title>fresh one2</title>
+            <description></description>
+            <date>2015-06-27T16:02:37</date>
+            <size>0</size>
+            <duration></duration>
+            <streamable>0</streamable>
+            <creator>http://www.last.fm/user/Goranche</creator>
+            <url>http://www.last.fm/user/Goranche/library/playlists/71h4k_fresh_one2</url>
+            <image size="small"></image>
+            <image size="medium"></image>
+            <image size="large"></image>
+            <image size="extralarge"></image>
+        </playlist>
+    </playlists>
+</lfm>

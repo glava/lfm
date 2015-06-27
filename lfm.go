@@ -6,7 +6,6 @@ import (
 	"github.com/glava/lfm/helper"
 	"github.com/glava/lfm/lastfm"
 	"strings"
-	//"fmt"
 )
 
 func main() {
@@ -48,6 +47,10 @@ func main() {
 	}
 
 	if *playlist != "" {
-
+		session := config.GetSession()
+		params := map[string]string{"method": "playlist.create", "title": *playlist, "api_key": apiConfig.ApiKey, "sk": session}
+		sig := lastfm.Signature(params, apiConfig.ApiSecret)
+		params["api_sig"] = sig
+		helper.Output(lastfm.ToPlaylist(<-lastfm.Post(params)), "")
 	}
 }

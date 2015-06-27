@@ -25,9 +25,7 @@ func TokenUrl(apiKey string, apiSig string) string {
 }
 
 func SessionUrl(apiKey string, token string, apiSig string) string {
-	s := fmt.Sprintf("http://ws.audioscrobbler.com/2.0/?method=auth.getsession&api_key=%s&token=%s&api_sig=%s&format=json", apiKey, token, apiSig)
-	fmt.Printf(s)
-	return s
+	return fmt.Sprintf("http://ws.audioscrobbler.com/2.0/?method=auth.getsession&api_key=%s&token=%s&api_sig=%s&format=json", apiKey, token, apiSig)
 }
 
 func Get(url string) chan []byte {
@@ -81,11 +79,9 @@ func getHttpBody(url string) (body []byte, err error) {
 
 func postBody(params map[string]string) (body []byte, err error) {
 	v := url.Values{}
-	fmt.Println("!!!")
 	for k, v1 := range params {
 		v.Set(k, v1)
 	}
-	fmt.Println(params)
 	response, err := http.PostForm("http://ws.audioscrobbler.com/2.0/", v)
 
 	if err != nil {
