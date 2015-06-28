@@ -19,7 +19,7 @@ func FetchSession(config config.ApiConfig, token string) string {
 	params := map[string]string{"api_key": config.ApiKey, "token": token, "method": "auth.getsession"}
 
 	open.Run(fmt.Sprintf("http://www.last.fm/api/auth/?api_key=%s&token=%s", config.ApiKey, token))
-	fmt.Println("After redirecting press enter")
+	fmt.Println("After you allow access app to your last.fm profile press enter")
 	reader := bufio.NewReader(os.Stdin)
 	text, _ := reader.ReadString('\n')
 	fmt.Println(text)
@@ -30,7 +30,7 @@ func Signature(params map[string]string, apiSecret string) string {
 	sig := new(string)
 	sortedKeys := make([]string, len(params))
 	i := 0
-	for k, _ := range params {
+	for k := range params {
 		sortedKeys[i] = k
 		i++
 	}

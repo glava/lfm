@@ -8,12 +8,17 @@ import (
 	"strings"
 )
 
+func BaseApiUrl(apiKey string, method string, format string) string {
+	return fmt.Sprintf("http://ws.audioscrobbler.com/2.0/?method=%s&api_key=%s&format=%s", method, apiKey, format)
+}
+
 func ArtistUrl(apiKey string, artist string, limit int) string {
-	return fmt.Sprintf("http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=%s&api_key=%s&limit=%d&format=json", cleanParam(artist), apiKey, limit)
+	return BaseApiUrl(apiKey, "artist.gettoptracks", "json") + fmt.Sprintf("&artist=%s&limit=%d", cleanParam(artist), limit)
 }
 
 func UserUrl(apiKey string, user string, limit int, period string) string {
 	return fmt.Sprintf("http://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&user=%s&api_key=%s&limit=%d&period=%s&format=json", user, apiKey, limit, period)
+
 }
 
 func TagUrl(apiKey string, tag string, limit int) string {
@@ -85,7 +90,6 @@ func postBody(params map[string]string) (body []byte, err error) {
 	response, err := http.PostForm("http://ws.audioscrobbler.com/2.0/", v)
 
 	if err != nil {
-		fmt.Println("hooo")
 		return body, err
 	} else {
 		defer response.Body.Close()

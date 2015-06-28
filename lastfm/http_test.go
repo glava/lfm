@@ -1,9 +1,7 @@
 package lastfm
 
 import (
-	"fmt"
 	"github.com/glava/lfm/config"
-	"github.com/glava/lfm/lastfm"
 	"io/ioutil"
 	"os"
 	"testing"
@@ -17,7 +15,7 @@ func TestPostSignature(t *testing.T) {
 
 	params := map[string]string{"method": "playlist.create", "title": "fresh one2", "api_key": apiConfig.ApiKey, "sk": session}
 
-	sig := lastfm.Signature(params, apiConfig.ApiSecret)
+	sig := Signature(params, apiConfig.ApiSecret)
 	expectedSig := "8c02305b691ed553558c47d7539cc11c"
 
 	if sig != expectedSig {
@@ -34,7 +32,7 @@ func TestPostParse(t *testing.T) {
 	defer xmlFile.Close()
 
 	b, _ := ioutil.ReadAll(xmlFile)
-	q := lastfm.ToPlaylist(b)
+	q := ToPlaylist(b)
 	if q.Playlists.Playlist.Id != "11826164" {
 		t.Errorf("Failed to parse. Id of parse %s is not equal to expected %s", q.Playlists.Playlist.Id, "11826164")
 	}
