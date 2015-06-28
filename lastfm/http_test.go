@@ -2,8 +2,6 @@ package lastfm
 
 import (
 	"github.com/glava/lfm/config"
-	"io/ioutil"
-	"os"
 	"testing"
 )
 
@@ -21,20 +19,4 @@ func TestPostSignature(t *testing.T) {
 	if sig != expectedSig {
 		t.Errorf("Failed to generate proper signature. Got %s ,expected %s", sig, expectedSig)
 	}
-}
-
-func TestPostParse(t *testing.T) {
-	xmlFile, err := os.Open("../test-rig/playlist-save.xml")
-	if err != nil {
-		t.Errorf("Failed to open playlist-save.xml file")
-	}
-
-	defer xmlFile.Close()
-
-	b, _ := ioutil.ReadAll(xmlFile)
-	q := ToPlaylist(b)
-	if q.Playlists.Playlist.Id != "11826164" {
-		t.Errorf("Failed to parse. Id of parse %s is not equal to expected %s", q.Playlists.Playlist.Id, "11826164")
-	}
-
 }
