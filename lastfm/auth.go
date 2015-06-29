@@ -21,6 +21,7 @@ func FetchSession(config config.ApiConfig, token string) string {
 	open.Run(fmt.Sprintf("http://www.last.fm/api/auth/?api_key=%s&token=%s", config.ApiKey, token))
 	fmt.Println("After you allow access app to your last.fm profile press enter")
 	reader := bufio.NewReader(os.Stdin)
+	//TODO remove this
 	text, _ := reader.ReadString('\n')
 	fmt.Println(text)
 	return ToSession(<-Get(SessionUrl(config.ApiKey, token, Signature(params, config.ApiSecret)))).Session.Key
