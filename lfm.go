@@ -25,6 +25,8 @@ func main() {
 
 	artists := append(strings.Split(*artistsFlag, ","), helper.ReadStdin()...)
 
+	//TODO: move go
+
 	if *artistsFlag != "" {
 
 		for _, artist := range artists {

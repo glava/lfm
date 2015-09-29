@@ -2,6 +2,7 @@ package lastfm
 
 import "encoding/json"
 import "encoding/xml"
+import "fmt"
 
 type Response interface {
 	ToString() string
@@ -79,12 +80,14 @@ func (t SessionResponse) ToString() string {
 func ToTracks(httpBody []byte) TracksResponse {
 	var response TracksResponse
 	json.Unmarshal(httpBody, &response)
+	fmt.Println(response)
 	return response
 }
 
 func ToArtists(httpBody []byte) ArtistResponse {
 	var response ArtistResponse
 	json.Unmarshal(httpBody, &response)
+
 	return response
 }
 

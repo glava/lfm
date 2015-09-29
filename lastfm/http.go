@@ -5,19 +5,35 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"strconv"
 	"strings"
 )
 
-func BaseApiUrl(apiKey string, method string, format string) string {
-	return fmt.Sprintf("http://ws.audioscrobbler.com/2.0/?method=%s&api_key=%s&format=%s", method, apiKey, format)
+const baseUrl = "http://localhost:1234"
+
+func BaseApiUrl(apiKey string, method string, format string, params map[string]string) string {
+	urlParams := url.Values{}
+	for key, value := range params {
+		urlParams.Add(key, value)
+	}
+	urlParams.Add("api_key", apiKey)
+	urlParams.Add("format", format)
+	urlParams.Add("method", method)
+	fmt.Println(baseUrl + "/2.0/?" + urlParams.Encode())
+	return baseUrl + "/2.0/?" + urlParams.Encode()
 }
 
 func ArtistUrl(apiKey string, artist string, limit int) string {
-	return BaseApiUrl(apiKey, "artist.gettoptracks", "json") + fmt.Sprintf("&artist=%s&limit=%d", cleanParam(artist), limit)
+	params := map[string]string{
+		"artist": artist,
+		"limit":  strconv.FormatInt(int64(limit), 10),
+	}
+
+	return BaseApiUrl(apiKey, "artist.gettoptracks", "json", params)
 }
 
 func UserUrl(apiKey string, user string, limit int, period string) string {
-	return fmt.Sprintf("http://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&user=%s&api_key=%s&limit=%d&period=%s&format=json", user, apiKey, limit, period)
+	return fmt.Sprintf("%s/2.0/?method=user.gettoptracks&user=%s&api_key=%s&limit=%d&period=%s&format=json", baseUrl, user, apiKey, limit, period)
 
 }
 
@@ -39,6 +55,7 @@ func Get(url string) chan []byte {
 		body, error := getHttpBody(url)
 		if error != nil {
 			fmt.Printf("%s", error)
+			//TODO: it is waiting idefinetly
 		} else {
 			yield <- body
 		}
