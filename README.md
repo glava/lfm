@@ -14,7 +14,7 @@ Inside a root of project run
 To list what users have been listening, you can issue
 
 ```bash
-lfm -u goranche,poohica,milann89 -p 12month
+ lfm -u goranche,poohica,milann89 -p 12month
 ```
 
 To get top tracks from artist you can run
