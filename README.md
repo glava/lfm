@@ -31,7 +31,7 @@ lfm -t rap | lfm -a Drake
 
 ## Idea 
 
-I created this project cause I wanted to learn go.I will try to cover as much of the language as possible. That is why some parts of the code will be overengineered. Topics I want to cover are:
+I created this project cause I wanted to learn go. I will try to cover as much of the language as possible. That is why some parts of the code will be overengineered. Topics I want to cover are:
 
 - basic structures
 - concurency
