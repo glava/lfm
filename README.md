@@ -7,8 +7,8 @@ lfm is a last.fm client written in go
 Inside a root of project run
 
 ```bash
-go build
-go install
+ go build
+ go install
 ```
 
 To list what users have been listening, you can issue
